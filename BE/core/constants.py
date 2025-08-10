@@ -1,4 +1,4 @@
-export const industries = [
+industry_keywords = {
   "Accounting",
   "Agriculture",
   "Airlines/Aviation",
@@ -147,4 +147,4 @@ export const industries = [
   "Wine & Spirits",
   "Wireless",
   "Writing & Editing"
-];
+}

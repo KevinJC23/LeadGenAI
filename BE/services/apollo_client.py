@@ -2,6 +2,7 @@ import httpx
 from fastapi import HTTPException
 from typing import Dict, Any
 from core.config import settings
+from core.constants import industry_keywords
 
 class ApolloAPIClient:    
     def __init__(self, api_key: str):
@@ -21,16 +22,29 @@ class ApolloAPIClient:
         city = location_parts[0] if location_parts else location
         state_country = location_parts[1] if len(location_parts) > 1 else ""
         
-        payload = {
-            "q_organization_keywords": industry,
-            "organization_locations": [f"{city}, {state_country}"] if state_country else [city],
-            "page": page,
-            "per_page": per_page,
-            "organization_num_employees_ranges": [
-                "1,10", "11,50", "51,200", "201,500", 
-                "501,1000", "1001,5000", "5001,10000", "10001+"
-            ]
-        }
+        if industry in industry_keywords:
+            payload = {
+                "q_organization_keyword_tags": [industry],
+                "organization_locations": [f"{city}, {state_country}"] if state_country else [city],
+                "page": page,
+                "per_page": per_page,
+                "organization_num_employees_ranges": [
+                    "1,10", "11,50", "51,200", "201,500",
+                    "501,1000", "1001,5000", "5001,10000", "10001+"
+                ]
+            }
+        else:
+            # Fallback if There is Not in the List
+            payload = {
+                "q_organization_keywords": industry,
+                "organization_locations": [f"{city}, {state_country}"] if state_country else [city],
+                "page": page,
+                "per_page": per_page,
+                "organization_num_employees_ranges": [
+                    "1,10", "11,50", "51,200", "201,500",
+                    "501,1000", "1001,5000", "5001,10000", "10001+"
+                ]
+            }
         
         async with httpx.AsyncClient(timeout=settings.REQUEST_TIMEOUT) as client:
             try:

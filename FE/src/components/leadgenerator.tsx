@@ -230,7 +230,6 @@ export function LeadGenerator({ onNavigateToAI }: LeadGeneratorProps) {
                                         <TableHead>Contact</TableHead>
                                         <TableHead>Employees</TableHead>
                                         <TableHead>Priority</TableHead>
-                                        <TableHead>Outreach Angle</TableHead>
                                         <TableHead>Last Updated</TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -275,7 +274,6 @@ export function LeadGenerator({ onNavigateToAI }: LeadGeneratorProps) {
                                                     {lead.priority}
                                                 </span>
                                             </TableCell>
-                                            <TableCell>{lead.outreachAngle}</TableCell>
                                             <TableCell>{lead.lastUpdated}</TableCell>
                                         </TableRow>
                                     ))}
