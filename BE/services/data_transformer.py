@@ -51,11 +51,20 @@ class DataTransformer:
         outreach_angle = DataTransformer.get_outreach_angle_from_industry(industry)
         
         # Get Contact Information
-        contact_name = person.get("name", "Contact not available")
-        contact_email = person.get("email", "")
-        contact_info = f"{contact_name}"
-        if contact_email:
-            contact_info += f" ({contact_email})"
+        primary_phone = organization.get("primary_phone", {})
+        contact_number = primary_phone.get("number", "")
+
+        if contact_number:
+            contact_info = contact_number
+        else:
+            contact_name = person.get("name")
+            contact_email = person.get("email")
+            if contact_name:
+                contact_info = contact_name
+                if contact_email:
+                    contact_info += f" ({contact_email})"
+            else:
+                contact_info = "Contact Not Available"
         
         # Format Location
         city = organization.get("city", "")
