@@ -9,6 +9,34 @@ B2B Lead Generation AI Web Application leverages publicly available business dat
 <img width="1918" height="906" alt="LeadGenAI" src="https://github.com/user-attachments/assets/59c4ca9f-6fb6-41b9-ac29-c2e238a05096" />
 <img width="1919" height="907" alt="AIOutreachMessageGenerator" src="https://github.com/user-attachments/assets/0b756541-d77e-41d8-9890-f6dab2124346" />
 
+## Feature Analysis 
+Strengths:
+- Multi-source lead collection from both Apollo API and Yellow Pages, improving coverage and data accuracy.
+- AI-powered outreach message generator that adapts tone, message type, and personalization level.
+- Supports multiple outreach channels: cold email, LinkedIn message, and cold call scripts.
+- Fallback message generation ensures no lead is left without an outreach attempt.
+
+Limitations:
+- Apollo API requires an API key or authenticated scraping session, limiting data access for some users.
+- Web scraping depends on site structure stability; changes in Yellow Pages HTML may require code updates.
+- AI message quality depends on the accuracy of input data; incomplete lead data may reduce personalization effectiveness.
+
+## Strategic Development Focus
+Using **Quality First Approach** to focus on improving the AI Outreach Message Generator by:
+- Enhancing personalization through multi-level customization (low, medium, high).
+- Expanding message type support (cold email, LinkedIn message, cold call scripts).
+- Implementing a quality analysis feature that scores AI-generated messages.
+
+Value Added:
+- Increased likelihood of positive response due to targeted and personalized outreach.
+- Reduced time for sales teams to craft effective initial messages.
+- Flexibility for different outreach channels without rewriting core logic.
+
+The improvements align with real-world business needs by:
+- Helping sales teams scale outreach without sacrificing personalization.
+- Reducing manual effort while maintaining quality.
+- Offering adaptability for different industries, company sizes, and communication channels.
+
 ## Dataset
 
 The data is collected through both API and Wesbite Scraping from two different main sources:
@@ -29,17 +57,17 @@ After collecting data from two different sources, several processing steps are a
 AI Outreach Message Generator developed uses Google Gemini 1.5 Flash, a transformer-based generative model optimized for fast, high-quality text generation. 
 
 Rationale for selection:
-- Speed: Gemini 1.5 Flash is optimized for low-latency generation, suitable for interactive web applications.
-- Context Handling: Capable of processing structured lead data (company details, industry, location, etc.) and generating relevant, personalized messages.
-- Flexibility: Supports multiple message types (cold emails, LinkedIn messages, cold call scripts) and tone/personalization adjustments.
-- Integration: Direct API access through google.generativeai makes it easy to integrate into the Python backend.
+- Speed: Optimized for fast response times, suitable for interactive applications.
+- Context Handling: Processes structured lead data to create relevant, personalized messages.
+- Flexibility: Supports multiple message types and tone adjustments.
+- Integration: Seamlessly integrates with Python backend via google.generativeai SDK.
 
 ## Performance Evaluation
 The AI component is evaluated based on both technical output quality and business impact:
-- Message Quality Analysis – The system includes an AI-based evaluation function that scores generated messages on Overall score, Personalization score, Clarity score, Engagement score, and Call-to-action score
-- Fallback Reliability – If AI generation fails, the system automatically produces a template-based fallback message to ensure no lead is left without an outreach.
-- Lead Matching Accuracy – Measured by how well the collected leads from Apollo and Yellow Pages match the industry and location filters requested by the user.
-- User Feedback Loop – The quality and effectiveness of AI-generated messages can be iteratively improved based on user feedback and response rates.
+- Message Quality Analysis: AI scoring based on personalization, clarity, engagement, and call-to-action effectiveness.
+- Fallback Reliability: Automatic generation of template-based fallback messages if AI fails.
+- Lead Matching Accuracy: Validating that leads meet specified industry and location criteria.
+- User Feedback Loop: Iteratively improving AI performance using real-world response data.
 
 ## Setup Instruction
 
@@ -166,74 +194,78 @@ docker compose down
 ```
 
 ## Folder Structure
-- Frontend (Next.js)
+Frontend (Next.js) & Backend (Python)
 ```
-FE/
-├── public/                   
-│   └── favicon.ico
+LEADGEN-AI/
 │
-├── src/                      # Source Code
-│   ├── app/                  # Main Application
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
+├── BE/                               # Backend - API & Business Logic
+│   ├── api/                          # API Route Definitions & Initialization
+│   │   ├── __init__.py
+│   │   └── routes.py
 │   │
-│   ├── components/           # Reusable UI Components
-│   │   ├── ui/
-│   │   │   ├── alert.tsx
-│   │   │   ├── button.tsx
-│   │   │   ├── card.tsx
-│   │   │   ├── checkbox.tsx
-│   │   │   ├── input.tsx
-│   │   │   ├── label.tsx
-│   │   │   ├── select.tsx
-│   │   │   ├── table.tsx
-│   │   │   ├── tabs.tsx
-│   │   │   └── textarea.tsx
-│   │   ├── aioutreachgenerator.tsx
-│   │   └── leadgenerator.tsx
+│   ├── core/                         # Core Configuration & Constants
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   └── constants.py
 │   │
-│   ├── contents/             # Static Data
-│   │   ├── index.ts
-│   │   ├── industries.ts
-│   │   └── locations.ts
+│   ├── models/                       # Data Models & Schemas
+│   │   ├── __init__.py
+│   │   └── schemas.py
 │   │
-│   └── lib/                  # API Calls & Utilities
-│       ├── api.ts
-│       └── utils.ts
+│   ├── services/                     # Business Logic & Service Layer
+│   │   ├── __init__.py
+│   │   ├── ai_outreach_service.py
+│   │   ├── apollo_client.py
+│   │   ├── data_transformer.py
+│   │   ├── export_service.py
+│   │   └── scraper_service.py
+│   │
+│   ├── venv/                         # Python Virtual Environment
+│   ├── Dockerfile                    # Backend Docker Configuration
+│   ├── main.py                       # Main Application Entry Point
+│   └── requirements.txt              # Python Dependencies
 │
-├── .env                      # Environment Variables
-├── package.json              # Node.js Dependencies
-├── next.config.js            # Next.js Configuration
-└── tsconfig.json             # TypeScript Configuration
-```
-
-- Backend (Python)
-```
-BE/
-├── api/                      # API Route Definitions & Initialization
-│   ├── __init__.py
-│   └── routes.py
+├── FE/                               # Frontend - User Interface
+│   ├── public/                       # Public Assets
+│   │   └── favicon.ico
+│   │
+│   ├── src/                          # Source Code
+│   │   ├── app/                      # Main Application Structure
+│   │   │   ├── favicon.ico
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   │
+│   │   ├── components/               # Reusable UI Components
+│   │   │   ├── ui/                   # Shared UI Elements
+│   │   │   │   ├── alert.tsx
+│   │   │   │   ├── button.tsx
+│   │   │   │   ├── card.tsx
+│   │   │   │   ├── checkbox.tsx
+│   │   │   │   ├── input.tsx
+│   │   │   │   ├── label.tsx
+│   │   │   │   ├── select.tsx
+│   │   │   │   ├── table.tsx
+│   │   │   │   ├── tabs.tsx
+│   │   │   │   └── textarea.tsx
+│   │   │   ├── aioutreachgenerator.tsx
+│   │   │   └── leadgenerator.tsx
+│   │   │
+│   │   ├── contents/                 # Static Data & Options
+│   │   │   ├── index.ts
+│   │   │   ├── industries.ts
+│   │   │   └── locations.ts
+│   │   │
+│   │   └── lib/                      # API Calls & Utilities
+│   │       ├── api.ts
+│   │       └── utils.ts
+│   │
+│   ├── .env                          # Environment Variables
+│   ├── Dockerfile                    # Frontend Docker Configuration
+│   ├── package.json                  # Node.js Dependencies
+│   ├── next.config.js                # Next.js Configuration
+│   └── tsconfig.json                 # TypeScript Configuration
 │
-├── core/                     # Core Configuration & Constants
-│   ├── __init__.py
-│   ├── config.py
-│   └── constants.py
-│
-├── models/                   # Data Models & Schemas
-│   ├── __init__.py
-│   └── schemas.py
-│
-├── services/                 # Business Logic & Service Layer
-│   ├── __init__.py
-│   ├── ai_outreach_service.py
-│   ├── apollo_client.py
-│   ├── data_transformer.py
-│   ├── export_service.py
-│   └── scraper_service.py
-│
-├── venv/                     # Python Venv
-├── main.py                   # Main Application
-└── requirements.txt          # Python Dependencies
+├── docker-compose.yaml               # Docker Compose File
+└── README.md                         # Markdown
 ```
