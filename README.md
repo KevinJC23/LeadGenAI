@@ -6,7 +6,8 @@ An enhanced Web Application to help users find potential customers and integrate
 
 B2B Lead Generation AI Web Application leverages publicly available business data based on companies industry and location to identify high-quality leads. This platform also implements an AI Outreach Message Generator as the solution to help users create a message to potential clients or companies more faster, saving time, and effort. The AI generates a personalized message based on company details selected by user. 
 
-
+<img width="1918" height="906" alt="LeadGenAI" src="https://github.com/user-attachments/assets/59c4ca9f-6fb6-41b9-ac29-c2e238a05096" />
+<img width="1919" height="907" alt="AIOutreachMessageGenerator" src="https://github.com/user-attachments/assets/0b756541-d77e-41d8-9890-f6dab2124346" />
 
 ## Dataset
 
@@ -133,6 +134,34 @@ or
 
 # Start the Frontend with npm in Development Mode
 npm run dev
+```
+
+### Docker Setup 
+This project includes a Dockerfile for both the backend and frontend, along with a docker-compose.yaml file to run them together. If you want to run this project using Docker, make sure to install both Docker and Docker Compose on your system.
+
+Create .env Files
+```
+# Backend (BE/.env)
+APOLLO_API_KEY=your_apollo_api_key
+GEMINI_API_KEY=your_gemini_api_key
+SCRAPING_DELAY=2
+
+# Frontend (FE/.env)
+NEXT_PUBLIC_API_URL=http://backend:8000
+```
+
+Build and Run with Docker
+```
+# From the root folder (where docker-compose.yaml is located):
+docker compose up --build
+
+# Frontend → http://localhost:3000
+# Backend → http://localhost:8000
+```
+
+Stop the Containers
+```
+docker compose down
 ```
 
 ## Folder Structure
