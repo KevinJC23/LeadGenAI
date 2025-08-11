@@ -155,8 +155,9 @@ Build and Run with Docker
 # From the root folder (where docker-compose.yaml is located):
 docker compose up --build
 
-# Frontend → http://localhost:3000
-# Backend → http://localhost:8000
+# Access the Application
+Frontend → http://localhost:3000
+Backend → http://localhost:8000
 ```
 
 Stop the Containers
