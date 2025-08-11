@@ -165,7 +165,7 @@ npm run dev
 ```
 
 ### Docker Setup 
-This project includes a Dockerfile for both the backend and frontend, along with a docker-compose.yaml file to run them together. If you want to run this project using Docker, make sure to install both Docker and Docker Compose on your system.
+This project includes a Dockerfile for both the Backend and Frontend, along with a docker-compose.yaml file to run them together. If you want to run this project using Docker, make sure to install both Docker and Docker Compose on your system.
 
 Create .env Files
 ```
